@@ -1,4 +1,4 @@
-import pygame 
+import pygame
 from pygame.sprite import Sprite
 from dino_runner.utils.constants import RUNNING
 from dino_runner.utils.constants import JUMPING
@@ -44,14 +44,15 @@ class Dinnsaur(Sprite):
 
     def jump(self):
         self.image = JUMPING
-        self.dino_jump.y -= self.jump_speed * 4
+        self.dino_rect.y -= self.jump_speed * 4
         
         self.jump_speed -= 0.8
 
         if self.jump_speed < -8.5:
             self.dino_rect.y = self.Y_POS
-            self.jump_speed = False
+            self.dino_jump = False
             self.jump_speed = self.JUM_SPEED
+            self.dino_run = True
 
 
         
