@@ -5,6 +5,7 @@ from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, T
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.menu import Menu
+from dino_runner.components.score import Score
 
 
 class Game:
@@ -22,9 +23,9 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.running = False
-        self.score = 0
         self.death_count = 0
         self.menu = Menu('Press any key to start ...', self.screen)
+        self.score = Score()
 
 
     def execute(self):
@@ -38,7 +39,7 @@ class Game:
 
     def run(self):
         self.obstacle_manager.reset_obstacles()
-        self.score = 0
+        self.score.score = 0
         self.game_speed = self.GAME_SPEED
         # Game loop: events - update - draw
         self.playing = True
@@ -56,7 +57,7 @@ class Game:
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.obstacle_manager.update(self)
-        self.update_score()
+        self.score.update_score(self)
 
     def draw(self):
         self.clock.tick(FPS)
@@ -64,7 +65,7 @@ class Game:
         self.draw_background()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
-        self.draw_score()
+        self.score.draw_score(self.screen)
         pygame.display.update()
         # pygame.display.flip()
 
@@ -86,23 +87,14 @@ class Game:
         if self.death_count == 0:
             self.menu.draw(self.screen)        
         else:
-            self.menu.update_message("Game over, Press any key to restart")
+            self.menu.update_message(f"{self.score.max_score}")
+            self.menu.update_message(f"{self.score.score}")
+            
+            
+
+
             self.menu.draw(self.screen)
 
         self.screen.blit(ICON, (half_screen_width - 50, half_screen_height - 140))
 
         self.menu.update(self)
-
-
-    def update_score(self):
-        self.score += 1
-        
-        if self.score % 100 == 0 and self.game_speed < 500:
-            self.game_speed += 5
-
-    def draw_score(self):
-        font = pygame.font.Font(FONT_STYLE, 30)
-        text = font.render(f'Score: {self.score}', True, (0, 0, 0) )
-        text_rect = text.get_rect()
-        text_rect.center = (1000, 50)
-        self.screen.blit(text, text_rect)
