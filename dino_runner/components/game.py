@@ -41,7 +41,6 @@ class Game:
         self.obstacle_manager.reset_obstacles()
         self.score.score = 0
         self.game_speed = self.GAME_SPEED
-        # Game loop: events - update - draw
         self.playing = True
         while self.playing:
             self.events()
@@ -87,13 +86,11 @@ class Game:
         if self.death_count == 0:
             self.menu.draw(self.screen)        
         else:
-            self.menu.update_message(f"{self.score.max_score}")
-            self.menu.update_message(f"{self.score.score}")
-            
-            
-
-
+            self.menu.update_message(f'Game over. Press any key to restart.',  f'Your Score: {self.score.score}', f'Max score: {self.score.max_score}', f'Total deaths: {self.death_count}')
             self.menu.draw(self.screen)
+        
+            
+        
 
         self.screen.blit(ICON, (half_screen_width - 50, half_screen_height - 140))
 

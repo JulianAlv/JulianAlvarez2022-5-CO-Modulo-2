@@ -13,7 +13,7 @@ class Score:
         self.score += 1
         
         if self.score % 100 == 0 and game.game_speed < 500:
-            game.game_speed += 2
+            game.game_speed += 0.5
         elif self.score > self.max_score:
             self.max_score = self.score
 
@@ -23,6 +23,5 @@ class Score:
         text_rect = text.get_rect()
         text_rect.center = (1000, 50)
         screen.blit(text, text_rect)
-    
 
 
