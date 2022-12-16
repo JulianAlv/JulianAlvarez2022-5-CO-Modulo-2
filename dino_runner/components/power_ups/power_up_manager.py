@@ -29,4 +29,8 @@ class PowerUpManager:
     def generate_power_up(self, score):
         if len(self.power_ups) == 0 and self.when_appends == score:
             self.power_ups.append(Shield())
-            self.when_appends += random.randint(100, 200)
+            self.when_appends += random.randint(300, 1000)
+
+    def reset(self):
+        self.when_appends = 0 
+        self.power_ups = []

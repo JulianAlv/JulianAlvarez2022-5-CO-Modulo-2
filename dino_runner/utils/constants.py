@@ -74,3 +74,6 @@ DEFAULT_TYPE = "default"
 FONT_STYLE = 'freesansbold.ttf'
 
 SHIELD_TYPE = 'shield'
+
+DINO_DEAD = pygame.image.load(os.path.join(IMG_DIR, 'Dino/DinoDead.png'))
+

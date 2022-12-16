@@ -100,8 +100,8 @@ class Game:
         self.menu.update(self)
                 
     def update_game_speed(self):
-        if self.score.count % 100 == 0 and self.game_speed < 500:
-            self.game_speed += 0.3
+        if self.score.count % 100 == 0 and self.game_speed < 400:
+            self.game_speed += 0.2
             
     def update_highest_score(self):
         if self.score.count > self.highest_score.count:
@@ -112,6 +112,7 @@ class Game:
         self.score.reset()
         self.game_speed = self.GAME_SPEED
         self.player.reset()
+        self.power_up_manager.reset()
 
     def draw_power_up_time(self):
         if self.player.has_power_up:

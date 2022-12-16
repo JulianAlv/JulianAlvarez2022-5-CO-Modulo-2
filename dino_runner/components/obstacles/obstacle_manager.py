@@ -1,14 +1,16 @@
 import pygame
 import random
 
-from dino_runner.utils.constants import SHIELD_TYPE
+from dino_runner.utils.constants import SHIELD_TYPE, DINO_DEAD
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
+
 
 
 class ObstacleManager:
   def __init__(self):
     self.obstacles = []
+
     
   def generate_obstacle(self, obstacle_type):
     if obstacle_type == 0:
@@ -31,10 +33,12 @@ class ObstacleManager:
       obstacle.update(game.game_speed, self.obstacles)
       if game.player.dino_rect.colliderect(obstacle.rect):
         if game.player.type != SHIELD_TYPE:
-          game.death_count.count += 1
-          pygame.time.delay(1000)
-          game.playing = False
-          break
+          game.player.dead()
+          if game.player.time_dead == 2:
+            game.death_count.count += 1
+            pygame.time.delay(1000)
+            game.playing = False
+            break
         
         else:
           self.obstacles.pop()
