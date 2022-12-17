@@ -11,10 +11,10 @@ class Counter:
     self.count += 1
     
   def draw(self, screen):
-    font = pygame.font.Font(FONT_STYLE, 30)
-    text = font.render(f'Score: {self.count}', True, (0, 0, 0))
+    font = pygame.font.Font(FONT_STYLE, 20)
+    text = font.render(f'Score: {self.count}', True, (52, 58, 64))
     text_rect = text.get_rect()
-    text_rect.center = (1000, 50)
+    text_rect.center = (950, 50)
     screen.blit(text, text_rect)
     
   def reset(self):

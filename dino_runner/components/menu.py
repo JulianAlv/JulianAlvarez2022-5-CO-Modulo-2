@@ -8,7 +8,7 @@ class Menu:
         
   def __init__(self, screen):
     screen.fill((255, 255, 255))
-    self.font = pygame.font.Font(FONT_STYLE, 30)
+    self.font = pygame.font.Font(FONT_STYLE, 20)
     
   def update(self, game):
     pygame.display.update()
@@ -26,7 +26,7 @@ class Menu:
     screen.fill((255, 255, 255))
     
   def draw(self, screen, message, x = HALF_SCREEN__WIDTH, y = HALF_SCREEN_HEIGHT):
-    text = self.font.render(message, True, (0, 0, 0))
+    text = self.font.render(message, True, (52, 58, 64))
     text_rect = text.get_rect()
     text_rect.center = (x, y)
     screen.blit(text, text_rect)

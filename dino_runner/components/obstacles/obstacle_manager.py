@@ -41,7 +41,7 @@ class ObstacleManager:
             break
         
         else:
-          self.obstacles.pop()
+          pass
   
   def draw(self, screen):
     for obstacle in self.obstacles:
